@@ -1,15 +1,13 @@
 use nums::display_number;
+use time::formatted_time;
 
 mod nums;
+mod time;
 
 fn main() {
     let mut display: [String; 5] = [String::from(""), String::from(""), String::from(""), String::from(""), String::from("")];
 
-    // display_zero(&mut display);
-    // display_space(&mut display);
-    // display_zero(&mut display);
-
-    display_number(&mut display, "01:23:45:67:89");
+    display_number(&mut display, &formatted_time());
 
     for e in &display {
         println!("{}", e);
