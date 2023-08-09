@@ -5,11 +5,18 @@ mod nums;
 mod time;
 
 fn main() {
-    let mut display: [String; 5] = [String::from(""), String::from(""), String::from(""), String::from(""), String::from("")];
+    let mut display: [String; 5];
 
-    display_number(&mut display, &formatted_time());
+    loop {
+        display = [String::from(""), String::from(""), String::from(""), String::from(""), String::from("")];
 
-    for e in &display {
-        println!("{}", e);
+        display_number(&mut display, &formatted_time());
+        
+        for e in &display {
+            println!("{}", e);
+        }
+
+        print!("\x1B[5A \x1B[G");
     }
+
 }
