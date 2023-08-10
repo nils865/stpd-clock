@@ -1,4 +1,4 @@
-use std::io::{self, Write};
+use std::{io::{self, Write}, thread, time::Duration};
 
 use nums::display_number;
 use term_size::dimensions;
@@ -51,5 +51,7 @@ fn main() {
         } else if time != formatted_time() {
             output(&terminal_width, &terminal_height, &mut time, &mut display);
         }
+
+        thread::sleep(Duration::from_millis(10));
     }
 }
