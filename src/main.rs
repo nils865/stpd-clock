@@ -1,8 +1,8 @@
 use nums::display_number;
-use time::formatted_time;
+use utils::formatted_time;
 
 mod nums;
-mod time;
+mod utils;
 
 fn main() {
     let mut display: [String; 5];

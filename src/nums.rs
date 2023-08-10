@@ -1,3 +1,5 @@
+use crate::utils::append_arr;
+
 pub fn display_number(display: &mut [String; 5], num: &str) {
     let mut counter = 0;
 
@@ -25,10 +27,6 @@ pub fn display_number(display: &mut [String; 5], num: &str) {
         display_space(display);
         counter += 1;
     }
-}
-
-fn append_arr(arr: &mut [String; 5], append: &str, pos: usize) {
-    arr[pos] = String::from(arr[pos].clone() + append);
 }
 
 fn display_space(display: &mut [String; 5]) {
