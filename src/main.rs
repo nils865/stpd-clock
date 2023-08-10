@@ -46,26 +46,5 @@ fn main() {
         } else if time != formatted_time() {
             output(&terminal_width, &terminal_height, &mut time, &mut display);
         }
-
-        // if time != formatted_time() || new_terminal_width != terminal_width || new_terminal_height != terminal_height {
-        //     terminal_height = new_terminal_height;
-        //     terminal_width = new_terminal_width;
-            
-        //     time = formatted_time();
-
-            
-        //     display_number(&mut display, &time);
-            
-        //     let text = center_text(&mut display, terminal_width, terminal_height);
-
-        //     // for e in &display {
-        //     //     println!("{}", e);
-        //     // }
-
-        //     print!("{}", text);
-    
-        //     print!("\x1B[{}A \x1B[G", terminal_height);
-        // }
     }
-
 }
