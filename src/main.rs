@@ -1,3 +1,5 @@
+use std::io::{self, Write};
+
 use nums::display_number;
 use term_size::dimensions;
 use utils::{formatted_time, center_text};
@@ -10,7 +12,7 @@ fn output(terminal_width: &usize, terminal_height: &usize, time: &mut String, di
 
     display_number(display, &time);
     
-    let text = center_text(display, *terminal_width, *terminal_height);
+    let text = center_text(display, terminal_width, terminal_height, time);
 
 
     print!("{}", text);
@@ -29,6 +31,9 @@ fn main() {
     let mut new_terminal_width: usize = 0;
     let mut new_terminal_height: usize = 0;
 
+    print!("\x1Bc");
+    io::stdout().flush().expect("Failed to flush");
+
     loop {
         display = [String::from(""), String::from(""), String::from(""), String::from(""), String::from("")];
 
@@ -41,7 +46,7 @@ fn main() {
             terminal_height = new_terminal_height;
             terminal_width = new_terminal_width;
 
-            print!("\x1B[2J");
+            print!("\x1Bc");
             output(&terminal_width, &terminal_height, &mut time, &mut display);
         } else if time != formatted_time() {
             output(&terminal_width, &terminal_height, &mut time, &mut display);

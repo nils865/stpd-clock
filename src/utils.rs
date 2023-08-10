@@ -10,31 +10,47 @@ pub fn formatted_time() -> String {
     return time;
 }
 
-pub fn center_text(arr: &mut [String; 5], width: usize, height: usize) -> String {
-    for i in 0..arr.len() {
-        if width <= arr[i].chars().count() {
-            break;
-        }
+pub fn pad_line(line: &mut String, width: &usize) {
+    let padding_width: usize = ((((width - line.chars().count()) / 2) as f32).floor()) as usize;
 
-        let padding_width: usize = ((((width - arr[i].chars().count()) / 2) as f32).floor()) as usize;
+    let mut padding_str = String::new();
 
-        let mut padding_str = String::new();
-
-        for _ in 0..padding_width {
-            padding_str = String::from(padding_str + " ");
-        }
-
-        // println!("{} {} {} {}\n", i, width, arr[i].chars().count(), padding_width);
-
-        arr[i] = String::from(padding_str + &arr[i].clone());
+    for _ in 0..padding_width {
+        padding_str = String::from(padding_str + " ");
     }
 
-    if height <= arr.len() * 2 {
-        return arr.join("\n");
+    // println!("{} {} {} {}\n", i, width, arr[i].chars().count(), padding_width);
+
+    *line = String::from(padding_str + line);
+}
+
+pub fn center_text(arr: &mut [String; 5], width: &usize, height: &usize, time: &String) -> String {
+    let content: String;
+    let content_height: usize;
+
+    if width <= &arr[1].chars().count() || height <= &arr.len() {
+        let mut current_time = time.clone();
+
+        pad_line(&mut current_time, width);
+
+        content_height = 1;
+        content = current_time;
+    } else {
+        for i in 0..arr.len() {
+            pad_line(&mut arr[i], width);
+        }
+
+        content_height = arr.len();
+        content = arr.join("\n");
     }
 
-    let top_padding_size: usize = (((height - arr.len()) / 2) as f32).floor() as usize;
-    let bottom_padding_size: usize = height - arr.len() - top_padding_size as usize;
+
+    // if height <= &content_height {
+    //     return content;
+    // }
+
+    let top_padding_size: usize = (((height - content_height) / 2) as f32).floor() as usize;
+    let bottom_padding_size: usize = height - content_height - top_padding_size as usize;
 
     let mut top_padding = String::new();
     let mut bottom_padding = String::new();
@@ -49,5 +65,5 @@ pub fn center_text(arr: &mut [String; 5], width: usize, height: usize) -> String
 
     // println!("{} {} {} {}", top_padding_size, bottom_padding_size, arr.len(), height);
 
-    return String::from(top_padding + &arr.join("\n") + &bottom_padding);
+    return String::from(top_padding + &content + &bottom_padding);
 }
