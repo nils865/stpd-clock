@@ -11,10 +11,13 @@ pub fn formatted_time() -> String {
 }
 
 pub fn center_text(arr: &mut [String; 5], width: usize, height: usize) -> String {
-    // let mut centered_lines: [String; 5];
-
     for i in 0..arr.len() {
+        if width <= arr[i].chars().count() {
+            break;
+        }
+
         let padding_width: usize = ((((width - arr[i].chars().count()) / 2) as f32).floor()) as usize;
+
         let mut padding_str = String::new();
 
         for _ in 0..padding_width {
@@ -24,6 +27,10 @@ pub fn center_text(arr: &mut [String; 5], width: usize, height: usize) -> String
         // println!("{} {} {} {}\n", i, width, arr[i].chars().count(), padding_width);
 
         arr[i] = String::from(padding_str + &arr[i].clone());
+    }
+
+    if height <= arr.len() * 2 {
+        return arr.join("\n");
     }
 
     let top_padding_size: usize = (((height - arr.len()) / 2) as f32).floor() as usize;
