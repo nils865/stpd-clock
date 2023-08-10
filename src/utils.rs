@@ -44,11 +44,6 @@ pub fn center_text(arr: &mut [String; 5], width: &usize, height: &usize, time: &
         content = arr.join("\n");
     }
 
-
-    // if height <= &content_height {
-    //     return content;
-    // }
-
     let top_padding_size: usize = (((height - content_height) / 2) as f32).floor() as usize;
     let bottom_padding_size: usize = height - content_height - top_padding_size as usize;
 
