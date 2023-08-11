@@ -31,7 +31,7 @@ fn main() {
     let mut new_terminal_width: usize = 0;
     let mut new_terminal_height: usize = 0;
 
-    print!("\x1B[1;1H");
+    print!("\x1Bc");
     io::stdout().flush().expect("Failed to flush");
 
     loop {
