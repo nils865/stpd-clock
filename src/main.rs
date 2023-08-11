@@ -17,7 +17,7 @@ fn output(terminal_width: &usize, terminal_height: &usize, time: &mut String, di
 
     print!("{}", text);
 
-    print!("\x1B[{}A \x1B[G", terminal_height);
+    print!("\x1B[1;1H");
 }
 
 fn main() {
@@ -31,7 +31,7 @@ fn main() {
     let mut new_terminal_width: usize = 0;
     let mut new_terminal_height: usize = 0;
 
-    print!("\x1Bc");
+    print!("\x1B[1;1H");
     io::stdout().flush().expect("Failed to flush");
 
     loop {
